@@ -217,7 +217,7 @@ function sb_sermon_init () {
 		add_action('wp_head', 'wp_print_styles', 9);
 		add_action('admin_bar_menu', 'sb_admin_bar_menu', 45);
 		add_filter('wp_title', 'sb_page_title');
-		if (defined('SAVEQUERIES') && SAVEQUERIES)
+		if (defined('SAVEQUERIES') && SAVEQUERIES && defined('WP_DEBUG') && WP_DEBUG && is_user_logged_in() && current_user_can('manage_options'))
 			add_action ('wp_footer', 'sb_footer_stats');
 	} else {
 		require (SB_INCLUDES_DIR.'/admin.php');
@@ -225,7 +225,7 @@ function sb_sermon_init () {
 		add_action ('rightnow_end', 'sb_rightnow');
 		add_action('admin_init', 'sb_add_admin_headers');
 		add_filter('contextual_help', 'sb_add_contextual_help');
-		if (defined('SAVEQUERIES') && SAVEQUERIES)
+		if (defined('SAVEQUERIES') && SAVEQUERIES && defined('WP_DEBUG') && WP_DEBUG && current_user_can('manage_options'))
 			add_action('admin_footer', 'sb_footer_stats');
 	}
 }
